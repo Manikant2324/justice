@@ -32,9 +32,13 @@ app.use('/api/appointments', require('./routes/appointmentRoutes'));
 app.use('/api/tasks', require('./routes/taskRoutes'));
 app.use('/api/cases', require('./routes/noteRoutes'));
 
-// Root test endpoint
+// Root welcome & health endpoints
+app.get('/', (req, res) => {
+  res.json({ status: 'active', message: 'JusticeHub Legal Case Management REST API Server Live' });
+});
+
 app.get('/api/health', (req, res) => {
-  res.json({ message: 'JusticeHub Legal Case Management REST API Active' });
+  res.json({ status: 'healthy', message: 'JusticeHub REST API Active' });
 });
 
 // Error handling middleware
