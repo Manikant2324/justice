@@ -125,27 +125,6 @@ export const LandingPage = () => {
 
         {/* Header Action CTAs */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
-          <a
-            href="http://localhost:5174"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              padding: '0.5rem 1rem',
-              borderRadius: '6px',
-              border: '1px solid #E2E8F0',
-              color: '#172033',
-              fontWeight: 600,
-              fontSize: '0.82rem',
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '0.35rem',
-              textDecoration: 'none',
-              background: '#FFFFFF'
-            }}
-          >
-            <Lock size={13} color="#C9A45C" /> Director Portal
-          </a>
-
           {user ? (
             <>
               <button
