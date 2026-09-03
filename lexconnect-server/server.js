@@ -44,10 +44,18 @@ app.use((err, req, res, next) => {
 });
 
 const PORT = process.env.PORT || 5000;
-connectDB().then(() => {
-  app.listen(PORT, () => {
-    console.log(`  JUSTICEHUB REST API Server running on port ${PORT}`);
-    console.log(`  Client & Lawyer Portal API endpoint: http://localhost:${PORT}/api`);
-    console.log(`  Management Director API endpoint: http://localhost:${PORT}/api/admin`);
+
+if (require.main === module) {
+  connectDB().then(() => {
+    app.listen(PORT, () => {
+      console.log(`  JUSTICEHUB REST API Server running on port ${PORT}`);
+      console.log(`  Client & Lawyer Portal API endpoint: http://localhost:${PORT}/api`);
+      console.log(`  Management Director API endpoint: http://localhost:${PORT}/api/admin`);
+    });
   });
-});
+} else {
+  connectDB();
+}
+
+module.exports = app;
+
