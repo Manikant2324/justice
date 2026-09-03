@@ -32,13 +32,27 @@ app.use('/api/appointments', require('./routes/appointmentRoutes'));
 app.use('/api/tasks', require('./routes/taskRoutes'));
 app.use('/api/cases', require('./routes/noteRoutes'));
 
-// Root welcome & health endpoints
+// Root welcome & health endpoints (Public - No Token Required)
 app.get('/', (req, res) => {
   res.json({ status: 'active', message: 'JusticeHub Legal Case Management REST API Server Live' });
 });
 
 app.get('/api/health', (req, res) => {
   res.json({ status: 'healthy', message: 'JusticeHub REST API Active' });
+});
+
+// Dedicated Public Ping & Database Status Endpoint (No Token Required)
+app.get('/api/ping', (req, res) => {
+  const mongoose = require('mongoose');
+  const dbState = mongoose.connection.readyState;
+  const states = { 0: 'disconnected', 1: 'connected', 2: 'connecting', 3: 'disconnecting' };
+  res.json({
+    status: 'online',
+    timestamp: new Date().toISOString(),
+    databaseStatus: states[dbState] || 'unknown',
+    authenticationRequired: false,
+    message: 'JusticeHub backend API is fully operational and publicly reachable!'
+  });
 });
 
 // Error handling middleware
